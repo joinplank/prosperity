@@ -27,7 +27,7 @@ your database to a paid Render service._
 
 #### Step 1: Create Render Blueprint
 
-<a href="https://render.com/deploy?repo=https://github.com/maybe-finance/maybe">
+<a href="https://render.com/deploy?repo=https://github.com/joinplank/prosperity">
 <img src="https://render.com/images/deploy-to-render-button.svg" alt="Deploy to Render" />
 </a>
 
