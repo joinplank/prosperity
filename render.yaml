@@ -1,6 +1,6 @@
 databases:
-  - name: maybe
-    user: maybe
+  - name: prosperity
+    user: joeyplank
     plan: free
 
 services:
@@ -9,7 +9,7 @@ services:
     autoDeploy: false
     runtime: ruby
     name: maybe
-    repo: https://github.com/maybe-finance/maybe.git
+    repo: https://github.com/joinplank/prosperity.git
     branch: main
     healthCheckPath: /up
     buildCommand: "./bin/render-build.sh"
