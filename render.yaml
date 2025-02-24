@@ -1,5 +1,5 @@
 databases:
-  - name: prosperity
+  - name: prosperity-db
     user: joeyplank
     plan: free
 
