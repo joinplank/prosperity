@@ -29,8 +29,8 @@
 services:
 
   app:
-    image: ghcr.io/maybe-finance/maybe:latest
-
+    build: .
+    image: maybe-app
     volumes:
       - app-storage:/rails/storage
 

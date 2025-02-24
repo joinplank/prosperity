@@ -8,7 +8,7 @@ en:
         subscription_title: Manage subscription
     preferences:
       data_enrichment_settings:
-        description: Let Maybe auto-categorize, name, and add merchant data to your
+        description: Let Prosperity auto-categorize, name, and add merchant data to your
           transactions on each sync.  All enrichment is done in English.
         self_host_disclaimer: This will incur Synth API credits.
         title: Transaction enrichment (English only)
@@ -61,7 +61,7 @@ en:
         last_name: Last Name
         page_title: Account
         pending: Pending
-        profile_subtitle: Customize how you appear on Maybe
+        profile_subtitle: Customize how you appear on Prosperity
         profile_title: Profile
         remove_invitation: Remove Invitation
         remove_member: Remove Member
