@@ -32,23 +32,26 @@ services:
     build: .
     image: maybe-app
     volumes:
+      - .:/rails
       - app-storage:/rails/storage
 
     ports:
       - 3000:3000
 
     restart: unless-stopped
+    command: ["./bin/rails", "server", "-b", "0.0.0.0"]
 
     environment:
+      RAILS_ENV: "development"
       SELF_HOSTED: "true"
       RAILS_FORCE_SSL: "false"
       RAILS_ASSUME_SSL: "false"
       GOOD_JOB_EXECUTION_MODE: async
-      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:-test}
       DB_HOST: postgres
       POSTGRES_DB: ${POSTGRES_DB:-maybe_production}
       POSTGRES_USER: ${POSTGRES_USER:-maybe_user}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-test}
 
     depends_on:
       postgres:

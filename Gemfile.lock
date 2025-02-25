@@ -399,6 +399,8 @@ GEM
     regexp_parser (2.10.0)
     reline (0.6.0)
       io-console (~> 0.5)
+    rerun (0.14.0)
+      listen (~> 3.0)
     rexml (3.4.0)
     rotp (6.3.0)
     rqrcode (2.2.0)
@@ -571,6 +573,7 @@ DEPENDENCIES
   rails (~> 7.2.2)
   rails-settings-cached
   redcarpet
+  rerun
   rotp (~> 6.3)
   rqrcode (~> 2.2)
   rubocop-rails-omakase
