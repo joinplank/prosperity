@@ -72,7 +72,7 @@ class Demo::Generator
 
     def create_user!
       family.users.create! \
-        email: "user@maybe.local",
+        email: "user@Prosperity.local",
         first_name: "Demo",
         last_name: "User",
         role: "admin",
@@ -278,7 +278,7 @@ class Demo::Generator
     def create_house_and_mortgage!
       house = family.accounts.create! \
         accountable: Property.new,
-        name: "123 Maybe Way",
+        name: "123 Prosperity Way",
         balance: 560000,
         currency: "USD"
 
