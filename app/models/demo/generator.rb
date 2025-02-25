@@ -10,7 +10,7 @@ class Demo::Generator
     puts "Data cleared"
 
     family_names.each_with_index do |family_name, index|
-      create_family_and_user!(family_name, "user#{index == 0 ? "" : index + 1}@maybe.local")
+      create_family_and_user!(family_name, "user#{index == 0 ? "" : index + 1}@prosperity.local")
     end
 
     puts "Users reset"
@@ -24,7 +24,7 @@ class Demo::Generator
     puts "Data cleared"
 
     family_names.each_with_index do |family_name, index|
-      create_family_and_user!(family_name, "user#{index == 0 ? "" : index + 1}@maybe.local")
+      create_family_and_user!(family_name, "user#{index == 0 ? "" : index + 1}@prosperity.local")
     end
 
     puts "Users reset"
@@ -68,7 +68,7 @@ class Demo::Generator
 
     puts "Data cleared"
 
-    create_family_and_user!("Demo Family 1", "user@maybe.local", currency: "EUR")
+    create_family_and_user!("Demo Family 1", "user@prosperity.local", currency: "EUR")
 
     family = Family.find_by(name: "Demo Family 1")
 
