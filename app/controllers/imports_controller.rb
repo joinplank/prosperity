@@ -18,7 +18,9 @@ class ImportsController < ApplicationController
   end
 
   def create
-    import = Current.family.imports.create! import_params
+    import = Current.family.imports.create!(
+      import_params.merge(status: 'pending')
+    )
 
     redirect_to import_upload_path(import)
   end
