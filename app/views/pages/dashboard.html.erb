@@ -181,7 +181,9 @@
         </div>
       </div>
     </section>
-    <section class="grid grid-cols-2 gap-4">
+
+      <% is_insights_enabled = posthog.is_feature_enabled('ENABLE_INSIGHTS', Current.user.id) %>
+    <section class="grid <%= is_insights_enabled ? 'grid-cols-2' : 'grid-cols-1' %> gap-4">
       <div class="bg-white p-4 border border-alpha-black-25 shadow-xs rounded-xl space-y-4">
         <h2 class="text-lg font-medium text-gray-900"><%= t(".transactions") %></h2>
         <% if @transaction_entries.empty? %>
@@ -199,8 +201,10 @@
         <% end %>
       </div>
 
-      <div class="bg-white p-4 shadow-xs rounded-xl space-y-4">
-        <iframe 
+
+      <% if is_insights_enabled %>
+        <div class="bg-white p-4 shadow-xs rounded-xl space-y-4">
+          <iframe 
           src="<%= ENV['INSIGHTS_APP_URL'] %>/insights?session_token=<%= cookies[:session_token] %>" 
           width="100%" 
           height="800px" 
@@ -210,6 +214,7 @@
         </iframe>
 
       </div>
+      <% end %>
     </section>
   <% end %>
 </div>
