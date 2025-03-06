@@ -565,7 +565,7 @@ DEPENDENCIES
   pagy
   pg (~> 1.5)
   plaid
-  posthog-ruby
+  posthog-ruby (~> 2.7.1)
   propshaft
   puma (>= 5.0)
   rack-mini-profiler
