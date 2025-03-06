@@ -63,4 +63,8 @@ services:
       - key: POSTHOG_HOST
         sync: false   
       - key: POSTHOG_API_KEY
-        sync: false  
+        sync: false
+      - key: POSTHOG_PROJECT_ID
+        sync: false
+      - key: POSTHOG_PERSONAL_API_KEY
+        sync: false  # This will make it a secret env var
