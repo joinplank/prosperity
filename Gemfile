@@ -15,7 +15,7 @@ gem "bootsnap", require: false
 # Assets
 gem "importmap-rails"
 gem "propshaft"
-gem "tailwindcss-rails"
+gem "tailwindcss-rails", "~> 3.3.1"
 gem "lucide-rails", github: "maybe-finance/lucide-rails"
 
 # Hotwire
@@ -57,6 +57,7 @@ gem "intercom-rails"
 gem "plaid"
 gem "rotp", "~> 6.3"
 gem "rqrcode", "~> 2.2"
+gem "posthog-ruby"
 
 group :development, :test do
   gem "debug", platforms: %i[mri windows]

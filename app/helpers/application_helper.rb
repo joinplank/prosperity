@@ -196,4 +196,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def posthog
+    Rails.application.config.posthog
+  end
 end
