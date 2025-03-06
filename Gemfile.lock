@@ -326,8 +326,6 @@ GEM
     platform_agent (1.0.1)
       activesupport (>= 5.2.0)
       useragent (~> 0.16.3)
-    posthog-ruby (2.7.1)
-      concurrent-ruby (~> 1)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -565,7 +563,6 @@ DEPENDENCIES
   pagy
   pg (~> 1.5)
   plaid
-  posthog-ruby (~> 2.7, >= 2.7.1)
   propshaft
   puma (>= 5.0)
   rack-mini-profiler

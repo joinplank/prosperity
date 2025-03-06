@@ -182,7 +182,7 @@
       </div>
     </section>
 
-      <% is_insights_enabled = posthog.is_feature_enabled('ENABLE_INSIGHTS', Current.user.id) %>
+      <% is_insights_enabled = false %>
     <section class="grid <%= is_insights_enabled ? 'grid-cols-2' : 'grid-cols-1' %> gap-4">
       <div class="bg-white p-4 border border-alpha-black-25 shadow-xs rounded-xl space-y-4">
         <h2 class="text-lg font-medium text-gray-900"><%= t(".transactions") %></h2>
