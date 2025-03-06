@@ -5,7 +5,7 @@ databases:
 
 services:
   - type: web
-    plan: free
+    plan: starter
     autoDeploy: false
     runtime: ruby
     name: maybe
@@ -58,3 +58,9 @@ services:
       # See note in `render-build.sh` script.
       - key: RUN_DB_MIGRATIONS_IN_BUILD_STEP
         value: true
+
+      # PostHog Configuration
+      - key: POSTHOG_HOST
+        sync: false   
+      - key: POSTHOG_API_KEY
+        sync: false  
