@@ -10,6 +10,7 @@ default: &default
 development:
   <<: *default
   database: <%= ENV.fetch("POSTGRES_DB") { "maybe_development" } %>
+  port: <%= ENV.fetch("DB_PORT") { "5433" } %>
 
 test:
   <<: *default
