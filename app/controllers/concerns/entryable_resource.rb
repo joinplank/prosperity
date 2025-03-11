@@ -31,7 +31,7 @@ module EntryableResource
 
     if @entry.save
       @entry.sync_account_later
-      send_to_insights_api
+      SendTransactionToInsightsAppJob.perform_later(@entry, Current.user.id)
       
       flash[:notice] = t("account.entries.create.success")
 

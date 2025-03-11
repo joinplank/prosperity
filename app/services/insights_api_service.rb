@@ -1,12 +1,13 @@
 class InsightsApiService
   INSIGHTS_API_URL = ENV['INSIGHTS_APP_URL'] + '/api/insights' 
 
-  def initialize(entry)
+  def initialize(entry, user_id)
     @entry = entry
+    @user_id = user_id
   end
 
   def send_transaction
-    Rails.logger.info "Attempting to send transaction #{@entry.id} to Insights API"
+    Rails.logger.info "Attempting to send transaction #{@entry.id} for user #{@user_id} to Insights API"
     
     response = HTTParty.post(
       INSIGHTS_API_URL,
@@ -27,7 +28,7 @@ class InsightsApiService
   def transaction_payload
     payload = {
       transaction_id: @entry.id,
-      user_id: Current.user.id,
+      user_id: @user_id,
       amount: @entry.amount.abs,
       currency: @entry.currency,
       date: @entry.date,
