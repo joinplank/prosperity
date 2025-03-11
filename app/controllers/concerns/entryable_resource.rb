@@ -31,7 +31,8 @@ module EntryableResource
 
     if @entry.save
       @entry.sync_account_later
-
+      SendTransactionToInsightsAppJob.perform_later(@entry, Current.user.id)
+      
       flash[:notice] = t("account.entries.create.success")
 
       respond_to do |format|
@@ -125,5 +126,9 @@ module EntryableResource
         :account_id, :name, :enriched_name, :date, :amount, :currency, :excluded, :notes, :nature,
         entryable_attributes: self.class.permitted_entryable_attributes
       )
+    end
+
+    def send_to_insights_api
+      InsightsApiService.new(@entry).send_transaction
     end
 end

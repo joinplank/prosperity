@@ -58,6 +58,7 @@ gem "plaid"
 gem "rotp", "~> 6.3"
 gem "rqrcode", "~> 2.2"
 gem "posthog-ruby", "~> 2.7", ">= 2.7.1"
+gem "httparty"
 
 group :development, :test do
   gem "debug", platforms: %i[mri windows]
