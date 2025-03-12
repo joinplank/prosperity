@@ -1,6 +1,7 @@
 class Account < ApplicationRecord
   include Syncable, Monetizable, Issuable
 
+  after_create :process_historical_entries
   validates :name, :balance, :currency, presence: true
 
   belongs_to :family
@@ -156,5 +157,11 @@ class Account < ApplicationRecord
         currency: currency,
         entryable: Account::Valuation.new
     end
+  end
+
+  private
+
+  def process_historical_entries
+    AccountHistoricalEntriesJob.perform_later(id)
   end
 end
