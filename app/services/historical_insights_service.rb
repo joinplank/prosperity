@@ -7,6 +7,7 @@ class HistoricalInsightsService
   
     def process_historical_entries
       Rails.logger.info "Processing last 12 months of entries for account #{@account.id}"
+      Rails.logger.info "Historical entries payload: #{historical_payload}"
   
       begin
         response = HTTParty.post(
@@ -30,7 +31,7 @@ class HistoricalInsightsService
       entries = fetch_last_12_months_entries
       payload = {
         account_id: @account.id,
-        user_id: @account.user_id,
+        family_id: @account.family_id,
         entries: entries.map { |entry| format_entry(entry) }
       }
   
@@ -39,18 +40,16 @@ class HistoricalInsightsService
     end
   
     def fetch_last_12_months_entries
-      Entry.where(account_id: @account.id)
+      Account::Entry.where(account_id: @account.id)
            .where('date >= ?', 12.months.ago)
            .order(date: :asc)
-           .includes(:entryable) # Para evitar N+1 queries
+           .includes(:entryable) 
     end
   
     def format_entry(entry)
       {
         entry_id: entry.id,
-        amount: entry.amount.abs,
-        currency: entry.currency,
-        date: entry.date,
+        amount: entry.amount,
         name: entry.name,
         category: entry.entryable.category&.name,
         merchant: entry.entryable.merchant&.name,
