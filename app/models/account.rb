@@ -1,7 +1,7 @@
 class Account < ApplicationRecord
   include Syncable, Monetizable, Issuable
 
-  after_create :process_historical_entries
+  after_create :process_historical_entries, if: :processable_account_type?
   validates :name, :balance, :currency, presence: true
 
   belongs_to :family
@@ -163,5 +163,9 @@ class Account < ApplicationRecord
 
   def process_historical_entries
     AccountHistoricalEntriesJob.perform_later(id)
+  end
+
+  def processable_account_type?
+    accountable_type.in?(['Depository', 'CreditCard'])
   end
 end
