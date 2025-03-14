@@ -1,5 +1,5 @@
 class HistoricalInsightsService
-    INSIGHTS_API_URL = ENV['INSIGHTS_APP_URL'] + '/api/insights/historical'
+    INSIGHTS_API_URL = ENV['INSIGHTS_APP_URL'] + '/api/categories'
   
     def initialize(account)
       @account = account
