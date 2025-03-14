@@ -1,7 +1,6 @@
 class Account < ApplicationRecord
   include Syncable, Monetizable, Issuable
 
-  after_create :process_historical_entries, if: :processable_account_type?
   validates :name, :balance, :currency, presence: true
 
   belongs_to :family
@@ -158,8 +157,6 @@ class Account < ApplicationRecord
         entryable: Account::Valuation.new
     end
   end
-
-  private
 
   def process_historical_entries
     AccountHistoricalEntriesJob.perform_later(id)

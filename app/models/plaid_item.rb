@@ -39,8 +39,9 @@ class PlaidItem < ApplicationRecord
 
     accounts.each do |account|
       account.sync_data(start_date: start_date)
+      account.process_historical_entries if account.processable_account_type?
     end
-
+    
     plaid_data
   end
 
@@ -132,4 +133,5 @@ class PlaidItem < ApplicationRecord
     def remove_plaid_item
       plaid_provider.remove_item(access_token)
     end
+
 end
