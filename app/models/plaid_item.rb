@@ -39,9 +39,13 @@ class PlaidItem < ApplicationRecord
 
     accounts.each do |account|
       account.sync_data(start_date: start_date)
-      account.process_historical_entries if account.processable_account_type?
+      if account.family.categories.none? && account.processable_account_type?
+        account.process_historical_entries 
+      end
     end
-    
+
+    post_sync
+
     plaid_data
   end
 
