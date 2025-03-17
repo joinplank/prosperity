@@ -16,7 +16,11 @@ class HistoricalInsightsService
           headers: { 'Content-Type' => 'application/json' }
         )
   
-        Rails.logger.info "Successfully sent account historical data. Response: #{response.code}"
+        if response.success?
+          save_categories(JSON.parse(response.body))
+          Rails.logger.info "Successfully sent and saved account historical data. Response: #{response.code}"
+        end
+  
         response
       rescue StandardError => e
         Rails.logger.error "Failed to send account historical data: #{e.message}"
@@ -59,5 +63,29 @@ class HistoricalInsightsService
           type: @account.accountable_type
         }
       }
+    end
+  
+    def save_categories(categories_data)
+      ActiveRecord::Base.transaction do
+        categories_data.each do |category_data|
+          entry = Account::Entry.find_by(id: category_data['entry_id'])
+          next unless entry
+  
+          category = @account.family.categories.find_or_create_by!(
+            name: category_data['category']
+          ) do |cat|
+            cat.color = Category::COLORS.sample
+            cat.classification = entry.amount.positive? ? 'income' : 'expense'
+          end
+          
+          if entry.entryable_type == 'Account::Transaction'
+            entry.entryable.update!(category: category)
+          end
+        end
+      end
+    rescue StandardError => e
+      Rails.logger.error "Failed to save categories: #{e.message}"
+      Rails.logger.error e.backtrace.join("\n")
+      raise
     end
   end

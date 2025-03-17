@@ -18,4 +18,23 @@ class PlaidItemTest < ActiveSupport::TestCase
       @plaid_item.destroy
     end
   end
+
+  test "sync_data updates last_synced_at and syncs accounts" do
+    Timecop.freeze do
+      mock_time = Time.current
+      @plaid_item.stubs(:fetch_and_load_plaid_data).returns(:mock_plaid_data)
+      @plaid_item.accounts.each do |account|
+        account.expects(:sync_data).with(start_date: nil)
+        if account.family.categories.none? && account.processable_account_type?
+          account.expects(:process_historical_entries)
+        end
+      end
+      @plaid_item.expects(:post_sync)
+
+      result = @plaid_item.sync_data
+
+      assert_equal :mock_plaid_data, result
+      assert_equal mock_time, @plaid_item.last_synced_at
+    end
+  end
 end
